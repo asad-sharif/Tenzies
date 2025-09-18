@@ -1,0 +1,24 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* revise css selectors */
+
+body {
+  background-color: burlywood;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 100vh;
+}
+
+div {
+  width: 400px;
+  height: 300px;
+  border-radius: 5px;
+  background-color: aliceblue;
+  padding: 10px;
+}
