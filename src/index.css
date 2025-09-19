@@ -2,12 +2,19 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
 }
 
 /* revise css selectors */
 
+:root {
+  --green-bg: #59E391;
+  --primary-bg: #0B2434;
+  --secondary-bg: #F5F5F5;
+}
+
 body {
-  background-color: burlywood;
+  background-color: var(--primary-bg);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -15,10 +22,10 @@ body {
   min-height: 100vh;
 }
 
-div {
+div#root {
   width: 400px;
   height: 300px;
   border-radius: 5px;
-  background-color: aliceblue;
+  background-color: var(--secondary-bg);
   padding: 10px;
 }
