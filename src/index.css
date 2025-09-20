@@ -5,14 +5,16 @@
   font-family: "Montserrat", sans-serif;
 }
 
-/* revise css selectors */
-
 :root {
   --green-bg: #59E391;
   --primary-bg: #0B2434;
   --secondary-bg: #F5F5F5;
+  --purple-btn: #5035FF;
+  --off-white: #F5F5F5;
+  --text-light: #4A4E74
 }
 
+/* smallest screens */
 body {
   background-color: var(--primary-bg);
   display: flex;
@@ -22,10 +24,101 @@ body {
   min-height: 100vh;
 }
 
-div#root {
-  width: 400px;
-  height: 300px;
-  border-radius: 5px;
-  background-color: var(--secondary-bg);
-  padding: 10px;
+#root {
+  background-color: var(--off-white);
+  width: 90%;
+  height: fit-content;
+  border-radius: 10px;
+  padding: 1.5rem 1rem;
+  display: flex;
+}
+
+main {
+  width: 100%;
+  text-align: center;
+  flex: 1;
+}
+
+main h1 {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+main p {
+  font-size: .8rem;
+  color: var(--text-light);
+}
+
+#board {
+  display: grid;
+  grid-template-columns: repeat(5, 35px);
+  justify-content: center;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.dice {
+  background-color: var(--off-white);
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+  border-radius: 4px;
+  aspect-ratio: 1/1;
+  font-weight: bold;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dice-highlighted {
+  background-color: var(--green-bg);
+}
+
+main button {
+  background-color: var(--purple-btn);
+  color: white;
+  font-size: 1rem;
+  font-weight: 500;
+  padding: .5rem 2rem;
+  border-radius: 4px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  margin-top: .5rem;
+}
+
+/* mobile */
+@media(min-width: 360px) {
+  #board {
+    display: grid;
+    grid-template-columns: repeat(5, 40px);
+    justify-content: center;
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+
+  main p {
+    font-size: .9rem;
+    margin: .5rem auto;
+  }
+
+  main button {
+    padding: .5rem 2.5rem;
+  }
+}
+
+/* tablets and above */
+@media(min-width: 768px) {
+  #root {
+    width: 600px;
+  }
+
+  main p {
+    width: 80%;
+  }
+
+  #board {
+    grid-template-columns: repeat(5, 50px);
+    gap: 1.2rem;
+    margin: 2rem 0;
+  }
 }
