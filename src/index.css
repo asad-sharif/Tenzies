@@ -14,7 +14,7 @@
   --text-light: #4A4E74
 }
 
-/* smallest screens */
+/* below mobile - smallest screens */
 body {
   background-color: var(--primary-bg);
   display: flex;
