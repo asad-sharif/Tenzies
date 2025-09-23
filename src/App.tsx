@@ -16,13 +16,7 @@ const App = () => {
 
     <div id="board">
       {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((die, index) => (
-        // <div
-        //   key={index}
-        //   className={`${(dice === 4 || dice === 7) ? 'dice dice-highlighted' : 'dice'}`}
-        // >
-        //   {dice}
-        // </div>
-        <Die key={index} value={die}/>
+        <Die key={index} value={die} />
       ))}
     </div>
 
