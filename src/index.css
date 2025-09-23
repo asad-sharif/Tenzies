@@ -74,16 +74,19 @@ main p {
   background-color: var(--green-bg);
 }
 
-main button {
+button {
+  border-radius: 4px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+
+button#roll-btn {
   background-color: var(--purple-btn);
   color: white;
   font-size: 1rem;
   font-weight: 500;
   padding: .5rem 2rem;
-  border-radius: 4px;
-  outline: none;
-  border: none;
-  cursor: pointer;
   margin-top: .5rem;
 }
 
@@ -102,7 +105,7 @@ main button {
     margin: .5rem auto;
   }
 
-  main button {
+  button#roll-btn {
     padding: .5rem 2.5rem;
   }
 }

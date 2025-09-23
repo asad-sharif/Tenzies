@@ -1,10 +1,11 @@
 import { useState } from "react";
+import Die from "./components/Die";
 
 const App = () => {
   const [number, setNumber] = useState<number>()
 
   function generateRandomNummber() {
-    const randomNumber: number = Math.ceil(Math.random() * 10)
+    const randomNumber: number = Math.ceil(Math.random() * 6)
     setNumber(randomNumber)
     console.log(number);
   }
@@ -14,17 +15,18 @@ const App = () => {
     <p>Roll until all dice are the same. Click each die to freeze it at its current value between rolls.</p>
 
     <div id="board">
-      {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((dice, index) => (
-        <div
-          key={index}
-          className={`${(dice === 4 || dice === 7) ? 'dice dice-highlighted' : 'dice'}`}
-        >
-          {dice}
-        </div>
+      {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((die, index) => (
+        // <div
+        //   key={index}
+        //   className={`${(dice === 4 || dice === 7) ? 'dice dice-highlighted' : 'dice'}`}
+        // >
+        //   {dice}
+        // </div>
+        <Die key={index} value={die}/>
       ))}
     </div>
 
-    <button onClick={generateRandomNummber}>Roll</button>
+    <button id="roll-btn" onClick={generateRandomNummber}>Roll</button>
   </main>
 }
 
