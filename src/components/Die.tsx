@@ -1,12 +1,16 @@
 
 type PropT = {
     value: number
+    isHeld?: boolean
+    id: number
+    hold: (id: number) => void
 }
 
-const Die = ({ value }: PropT) => {
+const Die = ({ value, isHeld, id, hold }: PropT) => {
     return (
         <button
-            className={`${(value === 4 || value === 7) ? 'dice dice-highlighted' : 'dice'}`}
+            onClick={() => hold(id)}
+            className={`${isHeld ? 'dice dice-highlighted' : 'dice'}`}
         >
             {value}
         </button>

@@ -2,25 +2,70 @@ import { useState } from "react";
 import Die from "./components/Die";
 
 const App = () => {
-  const [number, setNumber] = useState<number>()
+  const [dice, setDice] = useState(generateRandomDice())
 
-  function generateRandomNummber() {
-    const randomNumber: number = Math.ceil(Math.random() * 6)
-    setNumber(randomNumber)
-    console.log(number);
+  function generateRandomDice() {
+    // 👇 a triditional approach to create an array of random numbers
+    // const newDice: number[] = []
+
+    // for (let i = 0; i < 10; i++) {
+    //   const random = Math.ceil(Math.random() * 6)
+    //   newDice.push(random)
+    // }
+
+    // return newDice
+
+    // 👇 a more functional programming approach is to use array methods
+    return new Array(10)
+      .fill(0)
+      .map((_, index) => ({
+        value: Math.ceil(Math.random() * 6),
+        isHeld: false,
+        id: index + 1
+      }))
   }
+
+  function hold(id: number) {
+    // console.log(id);
+
+
+      //** because we need to know the previos state, so used callback
+    // setDice(oldDice => {
+      //** because the oldDice was an array of objects so mapped it to get to each object
+    //   return oldDice.map(die => {
+      //** checked if this object matches with the id received
+    //     return die.id === id ?
+      //** only change the isHeld property
+    //       { ...die, isHeld: !die.isHeld } :
+    //       die
+    //   })
+    // })
+
+    // 😎👇 more concise with implicit returns
+    setDice(oldDice => oldDice.map(die => die.id === id ?
+      { ...die, isHeld: !die.isHeld } :
+      die
+    )
+    )
+  }
+
+  function rollDice(){
+    
+  }
+
 
   return <main>
     <h1>Tenzies</h1>
     <p>Roll until all dice are the same. Click each die to freeze it at its current value between rolls.</p>
 
     <div id="board">
-      {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((die, index) => (
-        <Die key={index} value={die} />
-      ))}
+      {dice?.map(die => (
+        <Die key={die.id} value={die.value} id={die.id} isHeld={die.isHeld} hold={hold} />
+      ))
+      }
     </div>
 
-    <button id="roll-btn" onClick={generateRandomNummber}>Roll</button>
+    <button id="roll-btn" onClick={rollDice}>Roll</button>
   </main>
 }
 
