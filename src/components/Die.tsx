@@ -11,6 +11,8 @@ const Die = ({ value, isHeld, id, hold }: PropT) => {
         <button
             onClick={() => hold(id)}
             className={`${isHeld ? 'dice dice-highlighted' : 'dice'}`}
+            aria-pressed={isHeld}
+            aria-label={`Die with value ${value}, ${isHeld ? 'held' : 'not held'}`}
         >
             {value}
         </button>

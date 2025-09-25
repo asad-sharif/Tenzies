@@ -1,8 +1,14 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Die from "./components/Die";
+import Confetti from "react-confetti";
+import { useWindowSize } from 'react-use'
+
 
 const App = () => {
-  const [dice, setDice] = useState(generateRandomDice())
+  const [dice, setDice] = useState(() => generateRandomDice())
+  const btnRef = useRef<HTMLButtonElement>(null)
+  const { width, height } = useWindowSize()
+
 
   function generateRandomDice() {
     // 👇 a triditional approach to create an array of random numbers
@@ -52,19 +58,30 @@ const App = () => {
   }
 
   function rollDice() {
-    setDice(oldDice => oldDice.map(die => (
-      die.isHeld ? die : {
-        ...die,
-        value: Math.ceil(Math.random() * 6)
-      }
-    )))
+    if (!gameWon) {
+      setDice(oldDice => oldDice.map(die => (
+        die.isHeld ? die : {
+          ...die,
+          value: Math.ceil(Math.random() * 6)
+        }
+      )))
+    } else {
+      setDice(generateRandomDice())
+    }
   }
 
   let gameWon = dice.every(die => die.isHeld) && dice.every(die => die.value === dice[0].value)
 
+  useEffect(() => { 
+    if (gameWon) {
+      btnRef.current && btnRef.current.focus()
+    }
+  }, [gameWon])
+
   return <main>
-    <h1>Tenzies</h1>
-    <p>Roll until all dice are the same. Click each die to freeze it at its current value between rolls.</p>
+    {gameWon && <Confetti width={width} height={height} />}
+    {gameWon ? <h1>Congratulations, You won!</h1> : <h1>Tenzies</h1>}
+    {gameWon ? <p>Press 'New Game' to start again.</p> : <p>Roll until all dice are the same. Click each die to freeze it at its current value between rolls.</p>}
 
     <div id="board">
       {dice?.map(die => (
@@ -79,7 +96,14 @@ const App = () => {
       }
     </div>
 
-    <button id="roll-btn" onClick={rollDice}>{gameWon ? "New Game" : 'Roll'}</button>
+    <button
+      id="roll-btn"
+      onClick={rollDice}
+      ref={btnRef}
+    >
+      {gameWon ? "New Game" : 'Roll'}
+
+    </button>
   </main>
 }
 
